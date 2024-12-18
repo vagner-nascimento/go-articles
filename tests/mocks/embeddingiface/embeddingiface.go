@@ -7,12 +7,14 @@ import (
 )
 
 func GetItem(svc dynamodbiface.DynamoDBAPI, key string) (*dynamodb.GetItemOutput, error) {
-	return svc.GetItem(&dynamodb.GetItemInput{
+	input := &dynamodb.GetItemInput{
 		TableName: aws.String("myTable"),
 		Key: map[string]*dynamodb.AttributeValue{
 			"myKey": {
 				N: aws.String(key),
 			},
 		},
-	})
+	}
+
+	return svc.GetItem(input)
 }
